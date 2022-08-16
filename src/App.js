@@ -2,15 +2,15 @@ import { ChakraProvider, Tooltip } from '@chakra-ui/react';
 import React from 'react';
 import { FiSettings } from 'react-icons/fi';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import { Navbar, Sidebar, Footer, ThemeSettings } from './components';
 import { Navbar, Sidebar } from './components';
+import { useStateContext } from './context/StateContext';
 import { Area, Bar, Calendar, ColorMapping, ColorPicker, Customers, ECommerce, Editor, Employees, Financial, Kanban, Line, Orders, Pie, Pyramid, Stacked } from './pages';
 
 import './App.css';
 
 function App() {
 
-  const activeMenu = true
+  const { activeMenu } = useStateContext()
 
   return (
     <ChakraProvider>
