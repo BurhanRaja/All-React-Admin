@@ -1,5 +1,5 @@
 import { Avatar, Tooltip, WrapItem } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BsChatLeft } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
@@ -8,11 +8,29 @@ import { RiArrowDropDownLine } from 'react-icons/ri';
 import avatar from '../assets/avatar.jpg';
 import { useStateContext } from '../context/StateContext';
 
+
 const Navbar = () => {
 
     const avatarName = 'Kent Dodds'
 
-    const { activeMenu, setActiveMenu } = useStateContext()
+    const { activeMenu, setActiveMenu, screenSize, setScreenSize } = useStateContext()
+
+    useEffect(() => {
+        const handleSize = () => setScreenSize(window.innerWidth)
+        window.addEventListener('resize', handleSize)
+        handleSize()
+
+        return () => window.removeEventListener('resize', handleSize)
+    }, [])
+
+    useEffect(() => {
+        if (screenSize <= 800) {
+            setActiveMenu(false)
+        }
+        else {
+            setActiveMenu(true)
+        }
+    }, [screenSize])
 
     return (
         <div className='flex justify-between items-center p-2 md:ml-6 md:mr-6 relative'>

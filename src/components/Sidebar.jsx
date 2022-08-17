@@ -1,11 +1,14 @@
 import React from 'react'
 import { SiPrestashop } from 'react-icons/si'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { links } from '../assets/dummyData'
 import { useStateContext } from '../context/StateContext'
 
 const Sidebar = () => {
     const { activeMenu } = useStateContext()
+
+    const selectedItem = 'flex items-center nav-item p-3 mx-3 my-2 rounded-xl hover:cursor-pointer text-white bg-blue-700 '
+    const normalItem = 'flex items-center nav-item p-3 mx-3 my-2 rounded-xl hover:bg-light-gray hover:cursor-pointer dark:text-gray-200 dark:hover:text-black'
 
     return (
         <div className='ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10'>
@@ -25,14 +28,12 @@ const Sidebar = () => {
                             <p className='text-gray-400 dark:text-gray-400 m-3 uppercase'>{item.title}</p>
                             {item.links.map((linkName) => {
                                 return <div key={linkName.name}>
-                                <Link to={`/${linkName.name}`}>
-                                    <div className="nav-item p-3 mx-3 my-2 rounded-xl hover:bg-light-gray hover:cursor-pointer flex items-center">
+                                <NavLink to={`/${linkName.name}`} className={({ isActive }) => isActive ? selectedItem : normalItem}>
                                         {linkName.icon}
                                         <span className='ml-3 capitalize'>
                                             {linkName.name}
                                         </span>
-                                    </div>
-                                </Link>
+                                </NavLink>
                                 </div>
                             })}
                         </div>
